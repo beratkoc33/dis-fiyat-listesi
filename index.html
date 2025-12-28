@@ -1,85 +1,125 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klinik Fiyat Listesi</title>
+    <title>Diş Kliniği | Fiyat Listesi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Tasarım Ayarları */
-        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { background: white; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; overflow: hidden; }
-        .header { background: #0056b3; color: white; padding: 25px; text-align: center; }
-        .search-container { padding: 15px; background: #fff; border-bottom: 1px solid #eee; }
-        #searchInput { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
-        .category-title { background: #f8f9fa; padding: 12px 20px; font-weight: bold; color: #0056b3; border-left: 5px solid #0056b3; }
-        .price-list { list-style: none; padding: 0; margin: 0; }
-        .price-item { display: flex; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #f1f1f1; transition: 0.2s; }
-        .service-name { font-size: 15px; color: #333; }
-        .price-tag { font-weight: bold; color: #0056b3; white-space: nowrap; }
-        .footer { text-align: center; padding: 15px; font-size: 11px; color: #999; }
-        .no-result { display: none; padding: 20px; text-align: center; color: #888; }
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .row-hover:hover { transform: scale(1.01); transition: all 0.2s ease; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
 
-<div class="container">
-    <div class="header">
-        <h2 style="margin:0">Diş Kliniği</h2>
-        <small>Güncel Hizmet Bedelleri</small>
-    </div>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">Klinik<span class="text-sky-500">Gülüş</span></span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="#" class="hover:text-sky-500 transition">Ana Sayfa</a>
+                <a href="#" class="hover:text-sky-500 transition">Tedaviler</a>
+                <a href="#" class="hover:text-sky-500 transition">İletişim</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" onkeyup="search()" placeholder="İşlem ara... (Örn: Dolgu)">
-    </div>
-
-    <div id="priceContent">
-        <div class="category-block">
-            <div class="category-title">CERRAHİ İŞLEMLER</div>
-            <ul class="price-list">
-                <li class="price-item"><span class="service-name">Diş Çekimi (Normal)</span><span class="price-tag">850 ₺</span></li>
-                <li class="price-item"><span class="service-name">Gömülü Diş Operasyonu</span><span class="price-tag">3.000 ₺</span></li>
-                <li class="price-item"><span class="service-name">İmplant (Yerli A+)</span><span class="price-tag">18.000 ₺</span></li>
-            </ul>
+    <header class="max-w-5xl mx-auto px-4 pt-12 pb-8">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Tedavi Fiyat Listesi</h1>
+            <p class="text-slate-500">Gülüşünüz bizim için değerli. Güncel fiyatlarımızı aşağıdan inceleyebilirsiniz.</p>
         </div>
 
-        <div class="category-block">
-            <div class="category-title">ESTETİK VE DOLGU</div>
-            <ul class="price-list">
-                <li class="price-item"><span class="service-name">Kompozit Dolgu</span><span class="price-tag">2.200 ₺</span></li>
-                <li class="price-item"><span class="service-name">Diş Beyazlatma (Ofis Tipi)</span><span class="price-tag">6.000 ₺</span></li>
-                <li class="price-item"><span class="service-name">Zirkonyum Kaplama</span><span class="price-tag">5.500 ₺</span></li>
-            </ul>
+        <div class="relative max-w-lg mx-auto">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <svg class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+            </span>
+            <input type="text" id="searchInput" onkeyup="filterPrices()" 
+                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-2xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-sm transition" 
+                placeholder="Tedavi veya işlem adı ara...">
         </div>
-    </div>
+    </header>
 
-    <div id="noResultMessage" class="no-result">Sonuç bulunamadı.</div>
+    <main class="max-w-5xl mx-auto px-4 pb-20">
+        <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/60 overflow-hidden border border-slate-100">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100">
+                        <th class="px-6 py-4 font-semibold text-slate-700">Tedavi İsmi</th>
+                        <th class="px-6 py-4 font-semibold text-slate-700 text-right">Fiyat</th>
+                    </tr>
+                </thead>
+                <tbody id="priceTableBody" class="divide-y divide-slate-50">
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">Dolgu (Kompozit)</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">1.250 TL</td>
+                    </tr>
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">Kanal Tedavisi (Tek Kanal)</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">2.100 TL</td>
+                    </tr>
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">Diş Beyazlatma (Ofis Tipi)</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">4.500 TL</td>
+                    </tr>
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">Diş Taşı Temizliği (Detertraj)</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">850 TL</td>
+                    </tr>
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">İmplant (Yerli)</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">12.000 TL</td>
+                    </tr>
+                    <tr class="row-hover transition-all">
+                        <td class="px-6 py-5 text-slate-700 font-medium">Zirkonyum Kaplama</td>
+                        <td class="px-6 py-5 text-right font-bold text-sky-600 italic">3.200 TL</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="noResults" class="hidden py-10 text-center text-slate-400">
+                Aradığınız kriterlere uygun bir tedavi bulunamadı.
+            </div>
+        </div>
+    </main>
 
-    <div class="footer">
-        ©️ 2025 Kapadokya Diş Sağlığı Merkezi <br>
-        Fiyatlar bilgilendirme amaçlıdır.
-    </div>
-</div>
+    <footer class="max-w-5xl mx-auto px-4 py-10 border-t border-slate-200 text-center text-slate-500 text-sm">
+        <p>&copy; 2025 KlinikGülüş. Tüm hakları saklıdır. Ürgüp / Nevşehir</p>
+    </footer>
 
-<script>
-    // Arama Fonksiyonu
-    function search() {
-        let input = document.getElementById('searchInput').value.toUpperCase();
-        let items = document.getElementsByClassName('price-item');
-        let found = false;
+    <script>
+        function filterPrices() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase();
+            const tbody = document.getElementById("priceTableBody");
+            const rows = tbody.getElementsByTagName("tr");
+            const noResults = document.getElementById("noResults");
+            let found = false;
 
-        for (let i = 0; i < items.length; i++) {
-            let text = items[i].innerText.toUpperCase();
-            if (text.includes(input)) {
-                items[i].style.display = "";
-                found = true;
-            } else {
-                items[i].style.display = "none";
+            for (let i = 0; i < rows.length; i++) {
+                let td = rows[i].getElementsByTagName("td")[0];
+                if (td) {
+                    let textValue = td.textContent || td.innerText;
+                    if (textValue.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                        found = true;
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
             }
-        }
-        document.getElementById('noResultMessage').style.display = found ? "none" : "block";
-    }
-</script>
 
+            noResults.style.display = found ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
