@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik Fiyat Listesi</title>
+    <style>
+        /* Tasarım Ayarları */
+        body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { background: white; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; overflow: hidden; }
+        .header { background: #0056b3; color: white; padding: 25px; text-align: center; }
+        .search-container { padding: 15px; background: #fff; border-bottom: 1px solid #eee; }
+        #searchInput { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
+        .category-title { background: #f8f9fa; padding: 12px 20px; font-weight: bold; color: #0056b3; border-left: 5px solid #0056b3; }
+        .price-list { list-style: none; padding: 0; margin: 0; }
+        .price-item { display: flex; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #f1f1f1; transition: 0.2s; }
+        .service-name { font-size: 15px; color: #333; }
+        .price-tag { font-weight: bold; color: #0056b3; white-space: nowrap; }
+        .footer { text-align: center; padding: 15px; font-size: 11px; color: #999; }
+        .no-result { display: none; padding: 20px; text-align: center; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2 style="margin:0">Diş Kliniği</h2>
+        <small>Güncel Hizmet Bedelleri</small>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" onkeyup="search()" placeholder="İşlem ara... (Örn: Dolgu)">
+    </div>
+
+    <div id="priceContent">
+        <div class="category-block">
+            <div class="category-title">CERRAHİ İŞLEMLER</div>
+            <ul class="price-list">
+                <li class="price-item"><span class="service-name">Diş Çekimi (Normal)</span><span class="price-tag">850 ₺</span></li>
+                <li class="price-item"><span class="service-name">Gömülü Diş Operasyonu</span><span class="price-tag">3.000 ₺</span></li>
+                <li class="price-item"><span class="service-name">İmplant (Yerli A+)</span><span class="price-tag">18.000 ₺</span></li>
+            </ul>
+        </div>
+
+        <div class="category-block">
+            <div class="category-title">ESTETİK VE DOLGU</div>
+            <ul class="price-list">
+                <li class="price-item"><span class="service-name">Kompozit Dolgu</span><span class="price-tag">2.200 ₺</span></li>
+                <li class="price-item"><span class="service-name">Diş Beyazlatma (Ofis Tipi)</span><span class="price-tag">6.000 ₺</span></li>
+                <li class="price-item"><span class="service-name">Zirkonyum Kaplama</span><span class="price-tag">5.500 ₺</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="noResultMessage" class="no-result">Sonuç bulunamadı.</div>
+
+    <div class="footer">
+        ©️ 2025 Kapadokya Diş Sağlığı Merkezi <br>
+        Fiyatlar bilgilendirme amaçlıdır.
+    </div>
+</div>
+
+<script>
+    // Arama Fonksiyonu
+    function search() {
+        let input = document.getElementById('searchInput').value.toUpperCase();
+        let items = document.getElementsByClassName('price-item');
+        let found = false;
+
+        for (let i = 0; i < items.length; i++) {
+            let text = items[i].innerText.toUpperCase();
+            if (text.includes(input)) {
+                items[i].style.display = "";
+                found = true;
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+        document.getElementById('noResultMessage').style.display = found ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
