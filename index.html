@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klinik Fiyat Listesi</title>
+    <title>Kadir Koç - Fiyat Listesi</title>
     <style>
         /* Tasarım Ayarları */
         body { font-family: sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
@@ -16,7 +16,7 @@
         .price-item { display: flex; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid #f1f1f1; transition: 0.2s; align-items: center; }
         .service-name { font-size: 15px; color: #333; line-height: 1.4; padding-right: 10px; }
         .price-tag { font-weight: bold; color: #0056b3; white-space: nowrap; font-size: 16px; }
-        .footer { text-align: center; padding: 20px; font-size: 11px; color: #999; line-height: 1.6; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #888; line-height: 1.6; background: #fcfcfc; border-top: 1px solid #eee; }
         .no-result { display: none; padding: 20px; text-align: center; color: #888; }
     </style>
 </head>
@@ -24,8 +24,8 @@
 
 <div class="container">
     <div class="header">
-        <h2 style="margin:0">Diş Kliniği</h2>
-        <small>Güncel Hizmet Bedelleri</small>
+        <h2 style="margin:0; font-size: 24px;">Kadir Koç</h2>
+        <small style="font-size: 14px; opacity: 0.9;">Diş Hekimi - Güncel Fiyat Listesi</small>
     </div>
 
     <div class="search-container">
@@ -65,7 +65,7 @@
     <div id="noResultMessage" class="no-result">Aradığınız işlem bulunamadı.</div>
 
     <div class="footer">
-        © 2026 Kapadokya Diş Sağlığı Merkezi <br>
+        © 2026 Kadir Koç Diş Kliniği - <strong>Tarsus</strong> <br>
         Fiyatlar bilgilendirme amaçlıdır. <br>
         İmplant fiyatına üst porselen kaplama dahil değildir.
     </div>
@@ -88,7 +88,6 @@
             }
         }
 
-        // Boş kalan kategorileri gizle
         for (let j = 0; j < categories.length; j++) {
             let visibleItems = categories[j].querySelectorAll('.price-item[style=""]');
             categories[j].style.display = (visibleItems.length > 0 || input === "") ? "" : "none";
