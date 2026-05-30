@@ -28,11 +28,13 @@
         <small style="font-size: 14px; opacity: 0.9;">Diş Hekimi - Güncel Fiyat Listesi</small>
     </div>
 
+    <!-- Arama Çubuğu -->
     <div class="search-container">
         <input type="text" id="searchInput" onkeyup="search()" placeholder="İşlem veya kategori ara...">
     </div>
 
     <div id="priceContent">
+        <!-- Muayene ve Görüntüleme -->
         <div class="category-block">
             <div class="category-title">MUAYENE VE RÖNTGEN</div>
             <ul class="price-list">
@@ -41,6 +43,7 @@
             </ul>
         </div>
 
+        <!-- Tedavi Bölümü -->
         <div class="category-block">
             <div class="category-title">TEDAVİ İŞLEMLERİ</div>
             <ul class="price-list">
@@ -49,9 +52,12 @@
                 <li class="price-item"><span class="service-name">Klasik Porselen Kaplama</span><span class="price-tag">10.000 ₺</span></li>
                 <li class="price-item"><span class="service-name">Zirkonyum Porselen Kaplama</span><span class="price-tag">15.000 ₺</span></li>
                 <li class="price-item"><span class="service-name">Porselen Kaplama Yapıştırma</span><span class="price-tag">1.500 ₺</span></li>
+                <!-- YENİ EKLENEN İŞLEM -->
+                <li class="price-item"><span class="service-name">Diş Taşı Temizliği</span><span class="price-tag">3.500 ₺</span></li>
             </ul>
         </div>
 
+        <!-- Cerrahi Bölümü -->
         <div class="category-block">
             <div class="category-title">CERRAHİ İŞLEMLER</div>
             <ul class="price-list">
@@ -73,3 +79,30 @@
 </div>
 
 <script>
+    function search() {
+        let input = document.getElementById('searchInput').value.toUpperCase();
+        let items = document.getElementsByClassName('price-item');
+        let categories = document.getElementsByClassName('category-block');
+        let foundAny = false;
+
+        for (let i = 0; i < items.length; i++) {
+            let text = items[i].innerText.toUpperCase();
+            if (text.includes(input)) {
+                items[i].style.display = "";
+                foundAny = true;
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+
+        for (let j = 0; j < categories.length; j++) {
+            let visibleItems = categories[j].querySelectorAll('.price-item[style=""]');
+            categories[j].style.display = (visibleItems.length > 0 || input === "") ? "" : "none";
+        }
+
+        document.getElementById('noResultMessage').style.display = foundAny ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
